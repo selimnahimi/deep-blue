@@ -1,0 +1,24 @@
+#include <stdbool.h>
+
+#ifndef _BOARD_H
+#define _BOARD_H
+
+#include "piece.h"
+#define BOARD_WIDTH 8
+#define BOARD_HEIGHT 8
+
+typedef struct board_state_t {
+    piece_t cells[BOARD_HEIGHT][BOARD_WIDTH];
+
+    struct board_state_t *previous;
+    struct board_state_t *next;
+} board_state_t;
+
+board_state_t board_generate();
+void board_print(board_state_t state);
+bool board_replace(int x, int y, piece_t newpiece);
+bool board_move(piece_t piece, int newx, int newy);
+board_state_t board_undo(board_state_t state);
+board_state_t board_redo(board_state_t state);
+
+#endif
