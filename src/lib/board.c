@@ -14,6 +14,7 @@ board_state_t board_generate() {
     board_state_t newboard;
 
     newboard.previous = &newboard;
+    newboard.stepnum = 0;
 
     // Set up board
     for (int y = 0; y < BOARD_HEIGHT; y++) {
@@ -70,6 +71,8 @@ board_state_t board_generate() {
 void board_print(board_state_t state) {
     setlocale(LC_CTYPE, "");
 
+    wprintf(L"%d\n", state.stepnum);
+
     for (int y = 0; y < BOARD_HEIGHT; y++) {
         for (int x = 0; x < BOARD_WIDTH; x++) {
             int team = state.cells[y][x].team;
@@ -92,24 +95,11 @@ bool isempty_cell(board_state_t state, int x, int y) {
     return piece.team == TEAM_NONE || piece.type == PIECE_NONE;
 }
 
-/*
-void board_print(board_state_t state) {
-    setlocale(LC_CTYPE, "");
-
-    for (wchar_t p = 0x2654; p <= 0x265F; p++) {
-        for (int i = 0; i < 8; i++)
-        {
-            wprintf(L"%lc", p);
-        }
-        wprintf(L"\n");
-    }
-}
-*/
-
 board_state_t board_copy(board_state_t state) {
     board_state_t newstate;
     newstate.previous = state.previous;
     newstate.next = state.next;
+    newstate.stepnum = state.stepnum;
 
     for (int y = 0; y < BOARD_HEIGHT; y++)
     {
@@ -130,12 +120,15 @@ bool board_replace(int x, int y, piece_t newpiece) {
 board_state_t board_move(board_state_t* state, int fromx, int fromy, int tox, int toy) {
     board_state_t oldstate = *state;
 
-    if (!isvalid_coords(fromx, fromy) || !isvalid_coords(tox, toy)) return oldstate;
-    if (isempty_cell(oldstate, fromx, fromy)) return oldstate;
+    // Invalid steps
+    if (!isvalid_coords(fromx, fromy) || !isvalid_coords(tox, toy)) return oldstate; // out of bounds
+    if (isempty_cell(oldstate, fromx, fromy)) return oldstate; // Trying to move empty cell
+    if (oldstate.cells[fromy][fromx].team == oldstate.cells[toy][tox].team) return oldstate; // Trying to hit our own
 
     board_state_t newstate = board_copy(oldstate);
-    state->next =        &newstate;
+    state->next =       &newstate;
     newstate.previous = state;
+    newstate.stepnum++;
 
     piece_t piece = newstate.cells[fromy][fromx];
     newstate.cells[toy][tox] = piece;

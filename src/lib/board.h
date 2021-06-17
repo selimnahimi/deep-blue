@@ -8,6 +8,7 @@
 #define BOARD_HEIGHT 8
 
 typedef struct board_state_t {
+    int stepnum;
     piece_t cells[BOARD_HEIGHT][BOARD_WIDTH];
 
     struct board_state_t *previous;
