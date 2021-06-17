@@ -5,11 +5,11 @@ int main(void)
     board_state_t board = board_generate();
     board_print(board);
 
-    board_state_t board2 = board_move(&board, 1, 1, 4, 4);
+    board_state_t board2 = board_move(&board, 1, 1, 2, 1);
 
     board_print(board2);
 
-    board_state_t board3 = board_move(&board2, 0, 0, 5, 5);
+    board_state_t board3 = board_move(&board2, 0, 0, 6, 6);
 
     board_print(board3);
 
