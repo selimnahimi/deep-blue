@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <wchar.h>
 #include <locale.h>
+#include <string.h>
 
 #include "board.h"
 #include "piece.h"
@@ -105,15 +106,32 @@ void board_print(board_state_t state) {
 }
 */
 
+board_state_t board_copy(board_state_t state) {
+    board_state_t newstate;
+    newstate.previous = state.previous;
+    newstate.next = state.next;
+
+    for (int y = 0; y < BOARD_HEIGHT; y++)
+    {
+        for (int x = 0; x < BOARD_WIDTH; x++)
+        {
+            newstate.cells[y][x] = state.cells[y][x];
+        }
+    }
+
+    return newstate;
+}
+
+
 bool board_replace(int x, int y, piece_t newpiece) {
     return false;
 }
 
-board_state_t board_move(board_state_t state, int fromx, int fromy, int tox, int toy) {
+board_state_t board_move(board_state_t* state, int fromx, int fromy, int tox, int toy) {
     if (!isvalid_coords(fromx, fromy) || !isvalid_coords(tox, toy)) return state;
     if (isempty_cell(state, fromx, fromy)) return state;
 
-    board_state_t newstate = state;
+    board_state_t newstate = board_copy(state);
     state.next =        &newstate;
     newstate.previous = &state;
 
@@ -126,11 +144,12 @@ board_state_t board_move(board_state_t state, int fromx, int fromy, int tox, int
 }
 
 board_state_t board_undo(board_state_t state) {
-    board_state_t newboard = *state.previous;
-    return newboard;
+    board_state_t newstate = *state.previous;
+
+    return newstate;
 }
 
 board_state_t board_redo(board_state_t state) {
-    board_state_t newboard = board_generate();
-    return newboard;
+    board_state_t newstate = board_generate();
+    return newstate;
 }
