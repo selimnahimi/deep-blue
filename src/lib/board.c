@@ -128,12 +128,14 @@ bool board_replace(int x, int y, piece_t newpiece) {
 }
 
 board_state_t board_move(board_state_t* state, int fromx, int fromy, int tox, int toy) {
-    if (!isvalid_coords(fromx, fromy) || !isvalid_coords(tox, toy)) return state;
-    if (isempty_cell(state, fromx, fromy)) return state;
+    board_state_t oldstate = *state;
 
-    board_state_t newstate = board_copy(state);
-    state.next =        &newstate;
-    newstate.previous = &state;
+    if (!isvalid_coords(fromx, fromy) || !isvalid_coords(tox, toy)) return oldstate;
+    if (isempty_cell(oldstate, fromx, fromy)) return oldstate;
+
+    board_state_t newstate = board_copy(oldstate);
+    state->next =        &newstate;
+    newstate.previous = state;
 
     piece_t piece = newstate.cells[fromy][fromx];
     newstate.cells[toy][tox] = piece;
