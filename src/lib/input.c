@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "board.h"
 #include "piece.h"
@@ -34,14 +35,14 @@ int letter_toint(char c) {
     }
 }
 
-board_state_t process_move(board_state_t state, const char* input, char* err) {
+board_state_t process_move(board_state_t* state, const char* input, char* err) {
     // A move looks like this: Rh4e1 where Rook moves from h4 to e1
 
     err = "none";
 
     if (strlen(input) != 5) {
-        err = "Invalid move syntax!";
-        return state;
+        err = "Invalid move syntax!\n";
+        return *state;
     }
 
     int fromx = letter_toint(input[1]);
@@ -50,11 +51,14 @@ board_state_t process_move(board_state_t state, const char* input, char* err) {
     int fromy = row_unnormalize(letter_toint(input[2]));
     int toy =   row_unnormalize(letter_toint(input[4]));
 
-    board_state_t move = board_move(&state, fromx, fromy, tox, toy);
+    /*printf("from: %d, %d\n", fromx, fromy);
+    printf("to: %d, %d\n", tox, toy);*/
 
-    if (strcmp(err, "none")) {
+    board_state_t move = board_move(state, fromx, fromy, tox, toy);
+
+    if (strcmp(err, "none") == 0) {
         return move;
     } else {
-        return state;
+        return *state;
     }
 }
