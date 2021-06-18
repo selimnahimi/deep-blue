@@ -1,8 +1,8 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <wchar.h>
-#include <locale.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "board.h"
 #include "piece.h"
@@ -69,11 +69,15 @@ board_state_t board_generate() {
 }
 
 void board_print(board_state_t state) {
-    setlocale(LC_CTYPE, "");
-
-    wprintf(L"%d\n", state.stepnum);
+    wprintf ( L"  ");
+    for (int x = 0; x < BOARD_WIDTH; x++) {
+        wprintf( L"%c ", 'a' + x);
+    }
+    wprintf ( L"\n");
 
     for (int y = 0; y < BOARD_HEIGHT; y++) {
+        wprintf(L"%d ", abs(y-BOARD_HEIGHT)); // row number
+
         for (int x = 0; x < BOARD_WIDTH; x++) {
             int team = state.cells[y][x].team;
             int type = state.cells[y][x].type;

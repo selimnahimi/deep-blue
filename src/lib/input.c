@@ -21,18 +21,22 @@ int row_unnormalize(int rownum) {
 
 int letter_toint(char c) {
     if (c >= '0' && c <= '9') {
+        // char representing a number
         return c - '0';
     }
 
     if (c >= 'A' && c <= 'Z') {
+        // char representing capital letters
         c += 32; // converting to lowercase
     }
 
     if (c >= 'a' && c <= 'z') {
+        // char representing lowercase letters
         return c - 'a';
-    } else {
-        return -1;
     }
+
+    // invalid
+    return -1;
 }
 
 board_state_t process_move(board_state_t state, const char* input, char* err) {

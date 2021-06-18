@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <locale.h>
 #include "lib/board.h"
 #include "lib/piece.h"
 #include "lib/input.h"
@@ -6,28 +7,22 @@
 int main(void)
 {
     board_state_t board = board_generate();
-    board_print(board);
 
-    char input[100];
-    char err[255];
-    wprintf( L"White's turn.\n");
-    wprintf( L"Enter a move: ");
-    scanf("%s", input);
+    while (true) {
+    setlocale(LC_CTYPE, "");
+        wprintf(L"Move #%d\n", board.stepnum);
+        board_print(board);
 
-    board_state_t move = process_move(board, input, err);
+        char input[100];
+        char err[255];
+        wprintf( L"White's turn.\n");
+        wprintf( L"Enter a move: ");
+        scanf("%s", input);
 
-    board_print(move);
+        board = process_move(board, input, err);
 
-    scanf("%s", input);
-
-    move = process_move(move, input, err);
-
-    board_print(move);
-    scanf("%s", input);
-
-    move = process_move(move, input, err);
-
-    board_print(move);
+        wprintf( L"------------------------------------\n");
+    }
 
     /*
     board_state_t board = board_generate();
