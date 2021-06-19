@@ -4,5 +4,5 @@ valgrind --leak-check=full \
          --track-origins=yes \
          --verbose \
          --log-file=valgrind-out.txt \
-         ./build/main.a
+         ./build/main.out
 cat valgrind-out.txt
