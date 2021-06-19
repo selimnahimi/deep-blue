@@ -48,6 +48,14 @@ board.h
 piece.h
 /home/camper/deep-blue/src/lib/piece.h
 
+/home/camper/deep-blue/src/lib/piece.c
+stdbool.h
+-
+wchar.h
+-
+piece.h
+/home/camper/deep-blue/src/lib/piece.h
+
 /home/camper/deep-blue/src/lib/piece.h
 stdbool.h
 -
