@@ -53,12 +53,11 @@ int main(void)
         }
     }
 
-    // Freeing allocated memory
+    // Freeing allocated memory for board states
     board_state_t* nextptr;
     board_state_t* cptr = board;
     while (cptr != NULL) {
         nextptr = cptr->previous;
-        //wprintf(L"freeing %d...\n", cptr->stepnum);
         free(cptr);
 
         cptr = nextptr;
