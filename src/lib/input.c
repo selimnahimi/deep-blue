@@ -44,6 +44,10 @@ board_state_t process_move(board_state_t state, const char* input, char* err) {
 
     err = "none";
 
+    if (strcmp(input, "undo")) {
+        return board_undo(state);
+    }
+
     if (strlen(input) != 5) {
         err = "Invalid move syntax!\n";
         return state;

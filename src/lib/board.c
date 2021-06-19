@@ -7,9 +7,6 @@
 #include "board.h"
 #include "piece.h"
 
-#define BOARD_WIDTH 8
-#define BOARD_HEIGHT 8
-
 board_state_t board_generate() {
     board_state_t newboard;
 

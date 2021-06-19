@@ -6,16 +6,34 @@
 
 int main(void)
 {
+    setlocale(LC_CTYPE, "");
+    
+    char p1_name[100];
+    char p2_name[100];
+
+    wprintf( L"Player #1 name: ");
+    scanf("%s", p1_name);
+
+    wprintf( L"Player #2 name: ");
+    scanf("%s", p2_name);
+
     board_state_t board = board_generate();
 
+    char input[100];
+    char err[255];
+
     while (true) {
-    setlocale(LC_CTYPE, "");
+        int move_num = board.stepnum;
+
         wprintf(L"Move #%d\n", board.stepnum);
         board_print(board);
 
-        char input[100];
-        char err[255];
-        wprintf( L"White's turn.\n");
+        if (move_num % 2 == 0) {
+            wprintf( L"%s's turn.\n", p1_name);
+        } else {
+            wprintf( L"%s's turn.\n", p2_name);
+        }
+
         wprintf( L"Enter a move: ");
         scanf("%s", input);
 

@@ -1,3 +1,6 @@
+#ifndef _PIECE_H
+#define _PIECE_H
+
 #include <stdbool.h>
 #include <wchar.h>
 
@@ -13,8 +16,6 @@
 #define TEAM_WHITE 0
 #define TEAM_BLACK 1
 
-#ifndef _PIECE_H
-#define _PIECE_H
 typedef struct piece_t {
     int team;
     int type;
