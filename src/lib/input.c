@@ -41,24 +41,24 @@ int letter_toint(char c) {
 }
 
 board_state_t* process_move(board_state_t* state, const char* input, char* err) {
-    // A move looks like this: Rh4e1 where Rook moves from h4 to e1
+    // A move looks like this: h4e1 where a piece moves from h4 to e1
 
-   strcpy(err, "none");
+    strcpy(err, "none");
 
     if (strcmp(input, "undo") == 0) {
         return board_undo(state);
     }
 
-    if (strlen(input) != 5) {
+    if (strlen(input) != 4) {
         strcpy(err, "Invalid move syntax!\n");
         return state;
     }
 
-    int fromx = letter_toint(input[1]);
-    int tox =   letter_toint(input[3]);
+    int fromx = letter_toint(input[0]);
+    int tox =   letter_toint(input[2]);
 
-    int fromy = row_unnormalize(letter_toint(input[2]));
-    int toy =   row_unnormalize(letter_toint(input[4]));
+    int fromy = row_unnormalize(letter_toint(input[1]));
+    int toy =   row_unnormalize(letter_toint(input[3]));
 
     int errcode = step_validate(state, fromx, fromy, tox, toy);
 

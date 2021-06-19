@@ -1,1 +1,0 @@
-/usr/bin/cc   -rdynamic CMakeFiles/test.out.dir/test.c.o  -o test.out -Wl,-rpath,/home/camper/deep-blue/build/lib lib/libchess.so.1.0 

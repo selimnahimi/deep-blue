@@ -1,1 +1,0 @@
-/usr/bin/cc -fPIC   -shared -Wl,-soname,libchess.so.1.0 -o libchess.so.1.0 CMakeFiles/chess.dir/piece.c.o CMakeFiles/chess.dir/board.c.o CMakeFiles/chess.dir/input.c.o 

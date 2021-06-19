@@ -1,5 +1,0 @@
-/home/camper/deep-blue/src/tests/test1 7 0.0002317
-/home/camper/deep-blue/src/tests/test1_compare 1 0.0080197
-/home/camper/deep-blue/src/tests/test2 7 0.000195914
-/home/camper/deep-blue/src/tests/test2_compare 1 0.008307
----
