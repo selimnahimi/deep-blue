@@ -140,6 +140,9 @@ int step_validate(board_state_t* state, int fromx, int fromy, int tox, int toy) 
     if (!isvalid_coords(fromx, fromy) || !isvalid_coords(tox, toy)) return 1; // out of bounds
     if (isempty_cell(state, fromx, fromy)) return 2; // Trying to move empty cell
     if (state->cells[fromy][fromx].team == state->cells[toy][tox].team) return 3; // Trying to hit our own
+    
+    int current_team = state->stepnum % 2 == 0 ? TEAM_WHITE : TEAM_BLACK;
+    if (state->cells[fromy][fromx].team != current_team) return 4; // Trying to move a piece from different team
 
     return 0; // OK
 }

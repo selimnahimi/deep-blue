@@ -24,22 +24,23 @@ int main(void)
     while (true) {
         char input[100];
         char err[255];
+        char* current_player;
         
         int move_num = board->stepnum;
 
-        wprintf(L"Move #%d\n", board->stepnum);
-        board_print(board);
-
         if (move_num % 2 == 0) {
-            wprintf( L"%s's turn.\n", p1_name);
+            current_player = p1_name;
         } else {
-            wprintf( L"%s's turn.\n", p2_name);
+            current_player = p2_name;
         }
+
+        wprintf(L"Move #%d, %s's turn\n\n", board->stepnum, current_player);
+        board_print(board);
 
         wprintf( L"Enter a move: ");
         scanf("%s", input);
 
-        if (strcmp("exit", input) == 0) {
+        if (strcmp("end", input) == 0) {
             break;
         }
 
@@ -47,8 +48,8 @@ int main(void)
 
         wprintf( L"------------------------------------\n");
 
-        wprintf( L"Invalid move: %s\n", err);
         if (strcmp("none", err) != 0) {
+            wprintf( L"Invalid move: %s\n", err);
         }
     }
 

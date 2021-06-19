@@ -60,9 +60,6 @@ board_state_t* process_move(board_state_t* state, const char* input, char* err) 
     int fromy = row_unnormalize(letter_toint(input[2]));
     int toy =   row_unnormalize(letter_toint(input[4]));
 
-    /*printf("from: %d, %d\n", fromx, fromy);
-    printf("to: %d, %d\n", tox, toy);*/
-
     int errcode = step_validate(state, fromx, fromy, tox, toy);
 
     switch (errcode) {
@@ -76,6 +73,9 @@ board_state_t* process_move(board_state_t* state, const char* input, char* err) 
             break;
         case 3:
             strcpy(err, "Trying to hit your own piece!\n");
+            break;
+        case 4:
+            strcpy(err, "This piece is not yours!\n");
             break;
         default:
             strcpy(err, "Unknown error\n");
