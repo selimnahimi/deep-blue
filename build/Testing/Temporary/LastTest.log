@@ -1,0 +1,63 @@
+Start testing: Jun 19 23:26 CEST
+----------------------------------------------------------
+1/4 Testing: /home/camper/deep-blue/src/tests/test1
+1/4 Test: /home/camper/deep-blue/src/tests/test1
+Command: "/bin/sh" "-c" "/home/camper/deep-blue/build/test.out Pa2a3 >/home/camper/deep-blue/src/tests/test1.out"
+Directory: /home/camper/deep-blue/build
+"/home/camper/deep-blue/src/tests/test1" start time: Jun 19 23:26 CEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"/home/camper/deep-blue/src/tests/test1" end time: Jun 19 23:26 CEST
+"/home/camper/deep-blue/src/tests/test1" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/4 Testing: /home/camper/deep-blue/src/tests/test1_compare
+2/4 Test: /home/camper/deep-blue/src/tests/test1_compare
+Command: "/usr/bin/cmake" "-E" "compare_files" "/home/camper/deep-blue/src/tests/test1.out" "/home/camper/deep-blue/src/tests/test1.exp"
+Directory: /home/camper/deep-blue/build
+"/home/camper/deep-blue/src/tests/test1_compare" start time: Jun 19 23:26 CEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"/home/camper/deep-blue/src/tests/test1_compare" end time: Jun 19 23:26 CEST
+"/home/camper/deep-blue/src/tests/test1_compare" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/4 Testing: /home/camper/deep-blue/src/tests/test2
+3/4 Test: /home/camper/deep-blue/src/tests/test2
+Command: "/bin/sh" "-c" "/home/camper/deep-blue/build/test.out Pa2a3 >/home/camper/deep-blue/src/tests/test2.out"
+Directory: /home/camper/deep-blue/build
+"/home/camper/deep-blue/src/tests/test2" start time: Jun 19 23:26 CEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"/home/camper/deep-blue/src/tests/test2" end time: Jun 19 23:26 CEST
+"/home/camper/deep-blue/src/tests/test2" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/4 Testing: /home/camper/deep-blue/src/tests/test2_compare
+4/4 Test: /home/camper/deep-blue/src/tests/test2_compare
+Command: "/usr/bin/cmake" "-E" "compare_files" "/home/camper/deep-blue/src/tests/test2.out" "/home/camper/deep-blue/src/tests/test2.exp"
+Directory: /home/camper/deep-blue/build
+"/home/camper/deep-blue/src/tests/test2_compare" start time: Jun 19 23:26 CEST
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"/home/camper/deep-blue/src/tests/test2_compare" end time: Jun 19 23:26 CEST
+"/home/camper/deep-blue/src/tests/test2_compare" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jun 19 23:26 CEST

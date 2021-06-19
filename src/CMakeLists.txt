@@ -23,9 +23,8 @@ if (EXISTS ${CMAKE_CURRENT_LIST_DIR}/tests/)
 
         file(READ ${file} file_args)
         message("Adding test for ${FILE_WITHOUT_EXT}")
-        message("Test args: ${file_args}")
 
-        add_test(NAME ${FILE_WITHOUT_EXT} COMMAND ${test_executable} ${file_args})
-        add_test(NAME ${FILE_WITHOUT_EXT}_compare COMMAND ${CMAKE_COMMAND} -E compare_files )
+        add_test(NAME ${FILE_WITHOUT_EXT} COMMAND sh -c "${CMAKE_CURRENT_BINARY_DIR}/${test_executable} ${file_args} >${FILE_WITHOUT_EXT}.out")
+        add_test(NAME ${FILE_WITHOUT_EXT}_compare COMMAND ${CMAKE_COMMAND} -E compare_files ${FILE_WITHOUT_EXT}.out ${FILE_WITHOUT_EXT}.exp)
     endforeach()
 endif()

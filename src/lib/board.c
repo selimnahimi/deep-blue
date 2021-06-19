@@ -95,7 +95,7 @@ void board_print_normal(board_state_t* state) {
             
             char p = '0' + type;
             char t = 'N';
-            
+
             if (team == TEAM_BLACK) t = 'B';
             if (team == TEAM_WHITE) t = 'W';
 
@@ -103,7 +103,6 @@ void board_print_normal(board_state_t* state) {
         }
         printf("\n");
     }
-    printf("\n");
 }
 
 bool isvalid_coords(int x, int y) {
