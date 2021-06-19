@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include <locale.h>
 #include "lib/board.h"
 #include "lib/piece.h"
@@ -37,9 +39,23 @@ int main(void)
         wprintf( L"Enter a move: ");
         scanf("%s", input);
 
+        if (strcmp("exit", input) == 0) {
+            break;
+        }
+
         board = process_move(board, input, err);
 
         wprintf( L"------------------------------------\n");
+    }
+
+    // Free memory
+    board_state_t* nextptr;
+    board_state_t* cptr = board;
+    while (cptr != NULL) {
+        nextptr = cptr->previous;
+        free(cptr);
+
+        cptr = nextptr;
     }
 
     /*

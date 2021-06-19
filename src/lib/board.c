@@ -10,7 +10,7 @@
 board_state_t* board_generate() {
     board_state_t* newboard = malloc(sizeof(board_state_t));
 
-    newboard->previous = newboard;
+    newboard->previous = NULL;
     newboard->stepnum = 0;
 
     // Set up board

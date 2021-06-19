@@ -1,5 +1,6 @@
 #!/bin/bash
 
+clear
 cd ./lib
 gcc -Wall -fPIC -c board.c
 gcc -Wall -fPIC -c piece.c
