@@ -1,0 +1,3 @@
+/home/camper/deep-blue/src/build/CMakeFiles/rebuild_cache.dir
+/home/camper/deep-blue/src/build/CMakeFiles/main.dir
+/home/camper/deep-blue/src/build/CMakeFiles/edit_cache.dir
