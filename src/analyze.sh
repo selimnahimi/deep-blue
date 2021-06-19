@@ -6,5 +6,4 @@ valgrind --leak-check=full \
          --verbose \
          --log-file=valgrind-out.txt \
          ./a.out
-clear
 cat valgrind-out.txt

@@ -99,7 +99,6 @@ bool isempty_cell(board_state_t* state, int x, int y) {
 board_state_t* board_copy(board_state_t* state) {
     board_state_t* newstate = malloc(sizeof(board_state_t));
     newstate->previous = state->previous;
-    newstate->next = state->next;
     newstate->stepnum = state->stepnum;
 
     for (int y = 0; y < BOARD_HEIGHT; y++)
@@ -122,12 +121,9 @@ board_state_t* board_move(board_state_t* state, int fromx, int fromy, int tox, i
     board_state_t* oldstate = state;
 
     // Invalid steps
-    if (!isvalid_coords(fromx, fromy) || !isvalid_coords(tox, toy)) return oldstate; // out of bounds
-    if (isempty_cell(oldstate, fromx, fromy)) return oldstate; // Trying to move empty cell
-    if (oldstate->cells[fromy][fromx].team == oldstate->cells[toy][tox].team) return oldstate; // Trying to hit our own
+    if (step_validate(oldstate, fromx, fromy, tox, toy) != 0) return oldstate;
 
     board_state_t* newstate = board_copy(oldstate);
-    state->next =       newstate;
     newstate->previous = state;
     newstate->stepnum++;
 
@@ -139,13 +135,25 @@ board_state_t* board_move(board_state_t* state, int fromx, int fromy, int tox, i
     return newstate;
 }
 
+int step_validate(board_state_t* state, int fromx, int fromy, int tox, int toy) {
+    // Invalid steps
+    if (!isvalid_coords(fromx, fromy) || !isvalid_coords(tox, toy)) return 1; // out of bounds
+    if (isempty_cell(state, fromx, fromy)) return 2; // Trying to move empty cell
+    if (state->cells[fromy][fromx].team == state->cells[toy][tox].team) return 3; // Trying to hit our own
+
+    return 0; // OK
+}
+
 board_state_t* board_undo(board_state_t* state) {
     board_state_t* newstate = state->previous;
 
-    return newstate;
-}
+    if (newstate != NULL) {
+        //wprintf ( L"freeing %d...\n", state->stepnum);
+        free(state);
 
-board_state_t* board_redo(board_state_t* state) {
-    board_state_t* newstate = board_generate();
-    return newstate;
+        return newstate;
+    } else {
+        //wprintf ( L"no need to free\n");
+        return state;
+    }
 }

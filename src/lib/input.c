@@ -43,14 +43,14 @@ int letter_toint(char c) {
 board_state_t* process_move(board_state_t* state, const char* input, char* err) {
     // A move looks like this: Rh4e1 where Rook moves from h4 to e1
 
-    err = "none";
+   strcpy(err, "none");
 
     if (strcmp(input, "undo") == 0) {
         return board_undo(state);
     }
 
     if (strlen(input) != 5) {
-        err = "Invalid move syntax!\n";
+        strcpy(err, "Invalid move syntax!\n");
         return state;
     }
 
@@ -63,9 +63,27 @@ board_state_t* process_move(board_state_t* state, const char* input, char* err) 
     /*printf("from: %d, %d\n", fromx, fromy);
     printf("to: %d, %d\n", tox, toy);*/
 
-    board_state_t* move = board_move(state, fromx, fromy, tox, toy);
+    int errcode = step_validate(state, fromx, fromy, tox, toy);
 
+    switch (errcode) {
+        case 0:
+            break;
+        case 1:
+            strcpy(err, "Coordinates out of bounds!\n");
+            break;
+        case 2:
+            strcpy(err, "No piece on given cell!\n");
+            break;
+        case 3:
+            strcpy(err, "Trying to hit your own piece!\n");
+            break;
+        default:
+            strcpy(err, "Unknown error\n");
+            break;
+    }
+    
     if (strcmp(err, "none") == 0) {
+        board_state_t* move = board_move(state, fromx, fromy, tox, toy);
         return move;
     } else {
         return state;
