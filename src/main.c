@@ -7,7 +7,7 @@
 int main(void)
 {
     setlocale(LC_CTYPE, "");
-    
+
     char p1_name[100];
     char p2_name[100];
 
@@ -17,15 +17,15 @@ int main(void)
     wprintf( L"Player #2 name: ");
     scanf("%s", p2_name);
 
-    board_state_t board = board_generate();
+    board_state_t* board = board_generate();
 
     char input[100];
     char err[255];
 
     while (true) {
-        int move_num = board.stepnum;
+        int move_num = board->stepnum;
 
-        wprintf(L"Move #%d\n", board.stepnum);
+        wprintf(L"Move #%d\n", board->stepnum);
         board_print(board);
 
         if (move_num % 2 == 0) {

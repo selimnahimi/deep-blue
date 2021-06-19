@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include "input.h"
 #include "board.h"
 #include "piece.h"
 
@@ -39,12 +40,12 @@ int letter_toint(char c) {
     return -1;
 }
 
-board_state_t process_move(board_state_t state, const char* input, char* err) {
+board_state_t* process_move(board_state_t* state, const char* input, char* err) {
     // A move looks like this: Rh4e1 where Rook moves from h4 to e1
 
     err = "none";
 
-    if (strcmp(input, "undo")) {
+    if (strcmp(input, "undo") == 0) {
         return board_undo(state);
     }
 
@@ -62,7 +63,7 @@ board_state_t process_move(board_state_t state, const char* input, char* err) {
     /*printf("from: %d, %d\n", fromx, fromy);
     printf("to: %d, %d\n", tox, toy);*/
 
-    board_state_t move = board_move(&state, fromx, fromy, tox, toy);
+    board_state_t* move = board_move(state, fromx, fromy, tox, toy);
 
     if (strcmp(err, "none") == 0) {
         return move;
