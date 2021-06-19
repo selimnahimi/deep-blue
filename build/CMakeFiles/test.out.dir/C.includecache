@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/camper/deep-blue/src/lib/board.h
+stdbool.h
+-
+piece.h
+/home/camper/deep-blue/src/lib/piece.h
+
+/home/camper/deep-blue/src/lib/input.h
+board.h
+/home/camper/deep-blue/src/lib/board.h
+piece.h
+/home/camper/deep-blue/src/lib/piece.h
+
+/home/camper/deep-blue/src/lib/piece.h
+stdbool.h
+-
+wchar.h
+-
+
+/home/camper/deep-blue/src/test.c
+stdio.h
+-
+locale.h
+-
+string.h
+-
+lib/board.h
+/home/camper/deep-blue/src/lib/board.h
+lib/piece.h
+/home/camper/deep-blue/src/lib/piece.h
+lib/input.h
+/home/camper/deep-blue/src/lib/input.h
+

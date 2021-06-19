@@ -51,6 +51,3 @@ wchar_t piece_getwchar(int team_num, int piece_num) {
 
     return piece_wchars[team_num][piece_num];
 }
-
-void piece_print(piece_t piece) {
-}

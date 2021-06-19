@@ -53,15 +53,7 @@ int main(void)
         }
     }
 
-    // Freeing allocated memory for board states
-    board_state_t* nextptr;
-    board_state_t* cptr = board;
-    while (cptr != NULL) {
-        nextptr = cptr->previous;
-        free(cptr);
-
-        cptr = nextptr;
-    }
+    board_freememory(board);
     
     return (0);
 }

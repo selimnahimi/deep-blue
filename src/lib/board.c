@@ -87,6 +87,25 @@ void board_print(board_state_t* state) {
     wprintf(L"\n");
 }
 
+void board_print_normal(board_state_t* state) {
+    for (int y = 0; y < BOARD_HEIGHT; y++) {
+        for (int x = 0; x < BOARD_WIDTH; x++) {
+            int team = state->cells[y][x].team;
+            int type = state->cells[y][x].type;
+            
+            char p = '0' + type;
+            char t = 'N';
+            
+            if (team == TEAM_BLACK) t = 'B';
+            if (team == TEAM_WHITE) t = 'W';
+
+            printf("%c%c", p, t);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
 bool isvalid_coords(int x, int y) {
     return x < BOARD_WIDTH && x >= 0 && y < BOARD_HEIGHT && y >= 0;
 }
@@ -158,5 +177,17 @@ board_state_t* board_undo(board_state_t* state) {
     } else {
         //wprintf ( L"no need to free\n");
         return state;
+    }
+}
+
+void board_freememory(board_state_t* state) {
+    // Freeing allocated memory for all linked board states
+    board_state_t* nextptr;
+    board_state_t* cptr = state;
+    while (cptr != NULL) {
+        nextptr = cptr->previous;
+        free(cptr);
+
+        cptr = nextptr;
     }
 }

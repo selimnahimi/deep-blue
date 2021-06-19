@@ -10,4 +10,3 @@ add_library(chess SHARED
 
 set_target_properties(chess PROPERTIES VERSION 1.0)
 target_include_directories(chess PUBLIC .)
-

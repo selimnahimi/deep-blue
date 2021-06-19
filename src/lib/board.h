@@ -16,10 +16,12 @@ typedef struct board_state_t {
 
 board_state_t* board_generate();
 void board_print(board_state_t* state);
+void board_print_normal(board_state_t* state);
 bool board_replace(int x, int y, piece_t newpiece);
 board_state_t* board_move(board_state_t* state, int fromx, int fromy, int tox, int toy);
 board_state_t* board_undo(board_state_t* state);
 board_state_t* board_redo(board_state_t* state);
 int step_validate(board_state_t* state, int fromx, int fromy, int tox, int toy);
+void board_freememory(board_state_t* state);
 
 #endif
